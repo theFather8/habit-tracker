@@ -5,9 +5,7 @@ import React from 'react';
 import {Pressable, Text} from '@/components/ui';
 import {
   Feed as FeedIcon,
-  Settings as SettingsIcon,
   Style as StyleIcon,
-  Home as ProfileIcon,
 } from '@/components/ui/icons';
 export default function TabLayout() {
   return (
@@ -27,24 +25,6 @@ export default function TabLayout() {
           headerShown: false,
           tabBarIcon: ({color}) => <StyleIcon color={color} />,
           tabBarButtonTestID: 'create-tab',
-        }}
-      />
-      <Tabs.Screen
-        name="profile"
-        options={{
-          title: 'Profile',
-          headerShown: false,
-          tabBarIcon: ({color}) => <ProfileIcon color={color} />,
-          tabBarButtonTestID: 'profile-tab',
-        }}
-      />
-      <Tabs.Screen
-        name="settings"
-        options={{
-          title: 'Settings',
-          headerShown: false,
-          tabBarIcon: ({color}) => <SettingsIcon color={color} />,
-          tabBarButtonTestID: 'settings-tab',
         }}
       />
     </Tabs>
