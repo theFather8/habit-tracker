@@ -1,12 +1,12 @@
 import React from 'react';
 // import { Env } from '@env';
-import { useColorScheme } from 'nativewind';
-import { observer } from 'mobx-react-lite';
+import {useColorScheme} from 'nativewind';
+import {observer} from 'mobx-react-lite';
 
-import { Item } from '@/components/settings/item';
-import { ItemsContainer } from '@/components/settings/items-container';
-import { LanguageItem } from '@/components/settings/language-item';
-import { ThemeItem } from '@/components/settings/theme-item';
+import {Item} from '@/components/settings/item';
+import {ItemsContainer} from '@/components/settings/items-container';
+import {LanguageItem} from '@/components/settings/language-item';
+import {ThemeItem} from '@/components/settings/theme-item';
 import {
   colors,
   FocusAwareStatusBar,
@@ -14,16 +14,16 @@ import {
   Text,
   View,
 } from '@/components/ui';
-import { Github, Rate, Share, Support, Website } from '@/components/ui/icons';
-import { translate } from '@/lib';
-import { useAuth } from '@/app/providers/auth/auth-provider';
+import {Github, Rate, Share, Support, Website} from '@/components/ui/icons';
+import {translate} from '@/lib';
+import {useAuth} from '@/providers/auth/auth-provider';
 
 export default observer(function Settings() {
-  const { signOut } = useAuth();
-  const { colorScheme } = useColorScheme();
+  const {signOut} = useAuth();
+  const {colorScheme} = useColorScheme();
   const iconColor =
     colorScheme === 'dark' ? colors.neutral[400] : colors.neutral[500];
-    
+
   return (
     <>
       <FocusAwareStatusBar />
