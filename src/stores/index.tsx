@@ -2,25 +2,22 @@ import React from 'react';
 
 import './_hydration';
 
-import { AuthStore, TokenType, AuthStatus } from './auth-store';
-import { UILanguageStore } from './ui-language-store';
-import { UIThemeStore } from './ui-theme-store';
-import { IStore, PVoid } from './types';
-
-// Re-export types
-export type { TokenType, AuthStatus };
+import {HabitStore} from './habit-store';
+import {UILanguageStore} from './ui-language-store';
+import {UIThemeStore} from './ui-theme-store';
+import {IStore, PVoid} from './types';
 
 // Centralized stores object
 class Stores {
-  auth = new AuthStore()
-  uiLanguage = new UILanguageStore()
-  uiTheme = new UIThemeStore()
-};
+  habit = new HabitStore();
+  uiLanguage = new UILanguageStore();
+  uiTheme = new UIThemeStore();
+}
 
 export const stores = new Stores();
 
 const storeContext = React.createContext<Stores>(stores);
-export const StoresProvider = ({ children }: any) => (
+export const StoresProvider = ({children}: any) => (
   <storeContext.Provider value={stores}>{children}</storeContext.Provider>
 );
 

@@ -9,37 +9,24 @@ import {
   Style as StyleIcon,
   Home as ProfileIcon,
 } from '@/components/ui/icons';
-import {useAuth} from '@/providers/auth/auth-provider';
-
 export default function TabLayout() {
-  const {status, isFirstTime} = useAuth();
-
-  if (isFirstTime) {
-    return <Redirect href="/(auth)/onboarding" />;
-  }
-
-  if (status === 'signOut') {
-    return <Redirect href="/(auth)/login" />;
-  }
-
   return (
     <Tabs>
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Feed',
+          title: 'Habits',
           tabBarIcon: ({color}) => <FeedIcon color={color} />,
-          headerRight: () => <CreateNewPostLink />,
           tabBarButtonTestID: 'feed-tab',
         }}
       />
       <Tabs.Screen
-        name="style"
+        name="create"
         options={{
-          title: 'Style',
+          title: 'Add Habit',
           headerShown: false,
           tabBarIcon: ({color}) => <StyleIcon color={color} />,
-          tabBarButtonTestID: 'style-tab',
+          tabBarButtonTestID: 'create-tab',
         }}
       />
       <Tabs.Screen

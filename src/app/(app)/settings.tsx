@@ -16,10 +16,8 @@ import {
 } from '@/components/ui';
 import {Github, Rate, Share, Support, Website} from '@/components/ui/icons';
 import {translate} from '@/lib';
-import {useAuth} from '@/providers/auth/auth-provider';
 
 export default observer(function Settings() {
-  const {signOut} = useAuth();
   const {colorScheme} = useColorScheme();
   const iconColor =
     colorScheme === 'dark' ? colors.neutral[400] : colors.neutral[500];
@@ -69,17 +67,6 @@ export default observer(function Settings() {
               onPress={() => {}}
             />
           </ItemsContainer>
-
-          {/* <ItemsContainer title="settings.about">
-            <Item text="settings.app_name" value={Env.NAME} />
-            <Item text="settings.version" value={Env.VERSION} />
-          </ItemsContainer> */}
-
-          <View className="my-8">
-            <ItemsContainer>
-              <Item text="settings.logout" onPress={() => signOut()} />
-            </ItemsContainer>
-          </View>
         </View>
       </ScrollView>
     </>

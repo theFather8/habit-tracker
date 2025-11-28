@@ -5,18 +5,14 @@ import FlashMessage from 'react-native-flash-message';
 import {observer} from 'mobx-react-lite';
 import {APIProvider} from '@/api/common/api-provider';
 import {StoresProvider, useStores} from '@/stores';
-import {AuthProvider} from './auth/auth-provider';
-
 const ThemedApp = observer(({children}: {children: React.ReactNode}) => {
   return (
-    <AuthProvider>
-      <APIProvider>
-        <BottomSheetModalProvider>
-          {children}
-          <FlashMessage position="top" />
-        </BottomSheetModalProvider>
-      </APIProvider>
-    </AuthProvider>
+    <APIProvider>
+      <BottomSheetModalProvider>
+        {children}
+        <FlashMessage position="top" />
+      </BottomSheetModalProvider>
+    </APIProvider>
   );
 });
 
