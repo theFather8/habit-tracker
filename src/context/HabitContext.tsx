@@ -5,6 +5,7 @@ import React, {
   useEffect,
   useCallback,
 } from 'react';
+import {AppState, AppStateStatus} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Habit, HabitFrequency} from '@/stores/types';
 
@@ -71,19 +72,23 @@ export const HabitProvider: React.FC<{children: React.ReactNode}> = ({
 
       switch (habit.frequency) {
         case 'minutely':
-          // Reset if more than 1 minute has passed (for testing)
+          // Reset if 60 seconds have passed since last completion
           const minutesDiff =
             (now.getTime() - lastCompletedDate.getTime()) / (1000 * 60);
           shouldReset = minutesDiff >= 1;
-          shouldResetStreak = minutesDiff >= 2; // Allow 1 minute grace period for streak
+
+          // Reset streak if missed the window (e.g., > 2 minutes passed)
+          shouldResetStreak = minutesDiff >= 2;
           break;
 
         case 'hourly':
-          // Reset if more than 1 hour has passed
+          // Reset if 60 minutes have passed since last completion
           const hoursDiff =
             (now.getTime() - lastCompletedDate.getTime()) / (1000 * 60 * 60);
           shouldReset = hoursDiff >= 1;
-          shouldResetStreak = hoursDiff >= 2; // Allow 1 hour grace period for streak
+
+          // Reset streak if missed the window (e.g., > 2 hours passed)
+          shouldResetStreak = hoursDiff >= 2;
           break;
 
         case 'daily':
@@ -238,6 +243,45 @@ export const HabitProvider: React.FC<{children: React.ReactNode}> = ({
   useEffect(() => {
     loadHabits();
   }, [loadHabits]);
+
+  // Check for resets when app comes to foreground or periodically
+  useEffect(() => {
+    const handleAppStateChange = (nextAppState: AppStateStatus) => {
+      if (nextAppState === 'active') {
+        setHabits(currentHabits => {
+          const resetHabits = checkHabitResets(currentHabits);
+          // Only update if changes occurred
+          if (JSON.stringify(resetHabits) !== JSON.stringify(currentHabits)) {
+            saveHabits(resetHabits);
+            return resetHabits;
+          }
+          return currentHabits;
+        });
+      }
+    };
+
+    const subscription = AppState.addEventListener(
+      'change',
+      handleAppStateChange,
+    );
+
+    // Check every second for real-time updates
+    const intervalId = setInterval(() => {
+      setHabits(currentHabits => {
+        const resetHabits = checkHabitResets(currentHabits);
+        if (JSON.stringify(resetHabits) !== JSON.stringify(currentHabits)) {
+          saveHabits(resetHabits);
+          return resetHabits;
+        }
+        return currentHabits;
+      });
+    }, 1000); // Check every second
+
+    return () => {
+      subscription.remove();
+      clearInterval(intervalId);
+    };
+  }, [saveHabits]);
 
   return (
     <HabitContext.Provider
