@@ -209,20 +209,28 @@ export default function Manage() {
             <Text className="text-2xl font-bold mb-6 text-white">
               {mode === 'add' ? 'Create New Habit' : 'Edit Habit'}
             </Text>
-            <Input
-              label="Title *"
-              placeholder="e.g., Drink water, Exercise, Read"
-              value={title}
-              onChangeText={setTitle}
-            />
-            <Input
-              label="Description"
-              placeholder="Add details or goals (optional)"
-              value={description}
-              onChangeText={setDescription}
-              multiline
-              numberOfLines={3}
-            />
+            <View className="mb-4">
+              <Text className="text-sm font-medium text-gray-300 mb-2">
+                Title *
+              </Text>
+              <Input
+                placeholder="e.g., Drink water, Exercise, Read"
+                value={title}
+                onChangeText={setTitle}
+              />
+            </View>
+            <View className="mb-4">
+              <Text className="text-sm font-medium text-gray-300 mb-2">
+                Description
+              </Text>
+              <Input
+                placeholder="Add details or goals (optional)"
+                value={description}
+                onChangeText={setDescription}
+                multiline
+                numberOfLines={3}
+              />
+            </View>
             <View>
               <Text className="text-sm font-medium text-gray-300 mb-3">
                 Frequency *
@@ -275,17 +283,16 @@ export default function Manage() {
             </View>
             <View className="flex-row mt-4">
               <View className="flex-1 mr-2">
-                <Button
-                  label="Cancel"
-                  variant="outline"
-                  onPress={handleCancel}
-                />
+                <Button variant="outline" onPress={handleCancel}>
+                  <Text className="text-white font-semibold">Cancel</Text>
+                </Button>
               </View>
               <View className="flex-1">
-                <Button
-                  label={mode === 'add' ? 'Create' : 'Update'}
-                  onPress={handleSave}
-                />
+                <Button onPress={handleSave}>
+                  <Text className="text-white font-semibold">
+                    {mode === 'add' ? 'Create' : 'Update'}
+                  </Text>
+                </Button>
               </View>
             </View>
             <View className="h-32" /> {/* Spacer for floating navbar */}
