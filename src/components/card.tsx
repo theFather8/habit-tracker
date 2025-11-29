@@ -1,40 +1,53 @@
-import { Link } from 'expo-router';
 import React from 'react';
+import {View, Text, Pressable} from '@/components/ui';
 
-import type { Post } from '@/api';
-import { Image, Pressable, Text, View } from '@/components/ui';
+interface CardProps {
+  title: string;
+  description?: string;
+  color?: string;
+  onPress?: () => void;
+  children?: React.ReactNode;
+  className?: string;
+}
 
-type Props = Post;
+export const Card = ({
+  title,
+  description,
+  color = '#8B5CF6',
+  onPress,
+  children,
+  className = '',
+}: CardProps) => {
+  const CardContent = (
+    <View
+      className={`rounded-2xl overflow-hidden shadow-lg border border-gray-100 dark:border-gray-800 ${className}`}
+      style={{borderTopWidth: 4, borderTopColor: color}}>
+      {/* Header with gradient */}
+      <View className="bg-gradient-to-br from-violet-50 to-purple-50 dark:from-violet-900/20 dark:to-purple-900/20 p-4">
+        <Text className="text-xl font-bold text-gray-900 dark:text-white">
+          {title}
+        </Text>
+        {description && (
+          <Text className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+            {description}
+          </Text>
+        )}
+      </View>
 
-const images = [
-  'https://images.unsplash.com/photo-1489749798305-4fea3ae63d43?auto=format&fit=crop&w=800&q=80',
-  'https://images.unsplash.com/photo-1564507004663-b6dfb3c824d5?auto=format&fit=crop&w=800&q=80',
-  'https://images.unsplash.com/photo-1515386474292-47555758ef2e?auto=format&fit=crop&w=800&q=80',
-  'https://plus.unsplash.com/premium_photo-1666815503002-5f07a44ac8fb?auto=format&fit=crop&w=800&q=80',
-  'https://images.unsplash.com/photo-1587974928442-77dc3e0dba72?auto=format&fit=crop&w=800&q=80',
-];
-
-export const Card = ({ title, body, id }: Props) => {
-  return (
-    <Link href={`/feed/${id}` as any} asChild>
-      <Pressable>
-        <View className="m-2 overflow-hidden rounded-xl  border border-neutral-300 bg-white  dark:bg-neutral-900">
-          <Image
-            className="h-56 w-full overflow-hidden rounded-t-xl"
-            contentFit="cover"
-            source={{
-              uri: images[Math.floor(Math.random() * images.length)],
-            }}
-          />
-
-          <View className="p-2">
-            <Text className="py-3 text-2xl ">{title}</Text>
-            <Text numberOfLines={3} className="leading-snug text-gray-600">
-              {body}
-            </Text>
-          </View>
-        </View>
-      </Pressable>
-    </Link>
+      {/* Content */}
+      {children && (
+        <View className="bg-white dark:bg-gray-800 p-4">{children}</View>
+      )}
+    </View>
   );
+
+  if (onPress) {
+    return (
+      <Pressable onPress={onPress} className="active:opacity-80">
+        {CardContent}
+      </Pressable>
+    );
+  }
+
+  return CardContent;
 };

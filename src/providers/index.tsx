@@ -4,14 +4,18 @@ import {BottomSheetModalProvider} from '@gorhom/bottom-sheet';
 import FlashMessage from 'react-native-flash-message';
 import {observer} from 'mobx-react-lite';
 import {APIProvider} from '@/api/common/api-provider';
-import {StoresProvider, useStores} from '@/stores';
+import {StoresProvider} from '@/stores';
+import {HabitProvider} from '@/context/HabitContext';
+
 const ThemedApp = observer(({children}: {children: React.ReactNode}) => {
   return (
     <APIProvider>
-      <BottomSheetModalProvider>
-        {children}
-        <FlashMessage position="top" />
-      </BottomSheetModalProvider>
+      <HabitProvider>
+        <BottomSheetModalProvider>
+          {children}
+          <FlashMessage position="top" />
+        </BottomSheetModalProvider>
+      </HabitProvider>
     </APIProvider>
   );
 });

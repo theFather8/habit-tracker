@@ -17,11 +17,17 @@ export interface IStore {
   hydrate?: () => PVoid;
 }
 
+export type HabitFrequency = 'hourly' | 'daily' | 'weekly';
+
 export interface Habit {
   id: string;
   title: string;
   description?: string;
   color: string;
-  completedDates: string[]; // YYYY-MM-DD
+  frequency: HabitFrequency;
+  streak: number;
+  completed: boolean;
+  lastCompleted: string | null; // ISO timestamp
+  completedDates: string[]; // YYYY-MM-DD - keeping for historical tracking
   createdAt: number;
 }
