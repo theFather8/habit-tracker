@@ -200,89 +200,95 @@ export default function Manage() {
           </View>
         </View>
       ) : (
-        <ScrollView
-          style={{flex: 1, padding: 16}}
-          showsVerticalScrollIndicator={false}>
-          <Text className="text-2xl font-bold mb-6 text-white">
-            {mode === 'add' ? 'Create New Habit' : 'Edit Habit'}
-          </Text>
-          <Input
-            label="Title *"
-            placeholder="e.g., Drink water, Exercise, Read"
-            value={title}
-            onChangeText={setTitle}
-          />
-          <Input
-            label="Description"
-            placeholder="Add details or goals (optional)"
-            value={description}
-            onChangeText={setDescription}
-            multiline
-            numberOfLines={3}
-          />
-          <View>
-            <Text className="text-sm font-medium text-gray-300 mb-3">
-              Frequency *
+        <View style={{flex: 1}}>
+          <ScrollView
+            style={{flex: 1, padding: 16}}
+            showsVerticalScrollIndicator={false}>
+            <Text className="text-2xl font-bold mb-6 text-white">
+              {mode === 'add' ? 'Create New Habit' : 'Edit Habit'}
             </Text>
+            <Input
+              label="Title *"
+              placeholder="e.g., Drink water, Exercise, Read"
+              value={title}
+              onChangeText={setTitle}
+            />
+            <Input
+              label="Description"
+              placeholder="Add details or goals (optional)"
+              value={description}
+              onChangeText={setDescription}
+              multiline
+              numberOfLines={3}
+            />
             <View>
-              {frequencyOptions.map(option => (
-                <Pressable
-                  key={option.value}
-                  onPress={() => setFrequency(option.value as HabitFrequency)}
-                  className={`flex-row items-center p-4 rounded-xl border-2 mb-3 ${
-                    frequency === option.value
-                      ? 'bg-purple-900/20 border-purple-600'
-                      : 'bg-gray-900 border-gray-700'
-                  }`}>
-                  <View
-                    className={`w-6 h-6 rounded-full border-2 items-center justify-center mr-3 ${
+              <Text className="text-sm font-medium text-gray-300 mb-3">
+                Frequency *
+              </Text>
+              <View>
+                {frequencyOptions.map(option => (
+                  <Pressable
+                    key={option.value}
+                    onPress={() => setFrequency(option.value as HabitFrequency)}
+                    className={`flex-row items-center p-4 rounded-xl border-2 mb-3 ${
                       frequency === option.value
-                        ? 'border-purple-600 bg-purple-600'
-                        : 'border-gray-600'
+                        ? 'bg-purple-900/20 border-purple-600'
+                        : 'bg-gray-900 border-gray-700'
                     }`}>
-                    {frequency === option.value ? (
-                      <View className="w-3 h-3 rounded-full bg-white" />
+                    <View
+                      className={`w-6 h-6 rounded-full border-2 items-center justify-center mr-3 ${
+                        frequency === option.value
+                          ? 'border-purple-600 bg-purple-600'
+                          : 'border-gray-600'
+                      }`}>
+                      {frequency === option.value ? (
+                        <View className="w-3 h-3 rounded-full bg-white" />
+                      ) : null}
+                    </View>
+                    <Text className="text-white text-base font-medium">
+                      {option.label}
+                    </Text>
+                  </Pressable>
+                ))}
+              </View>
+            </View>
+            <View>
+              <Text className="text-sm font-medium text-gray-300 mb-2">
+                Color
+              </Text>
+              <View className="flex-row flex-wrap">
+                {colorOptions.map(colorOption => (
+                  <Button
+                    key={colorOption}
+                    variant="ghost"
+                    onPress={() => setColor(colorOption)}
+                    className="w-12 h-12 rounded-full p-0 mr-3 mb-3"
+                    style={{backgroundColor: colorOption}}>
+                    {color === colorOption ? (
+                      <Text className="text-white text-xl">✓</Text>
                     ) : null}
-                  </View>
-                  <Text className="text-white text-base font-medium">
-                    {option.label}
-                  </Text>
-                </Pressable>
-              ))}
+                  </Button>
+                ))}
+              </View>
             </View>
-          </View>
-          <View>
-            <Text className="text-sm font-medium text-gray-300 mb-2">
-              Color
-            </Text>
-            <View className="flex-row flex-wrap">
-              {colorOptions.map(colorOption => (
+            <View className="flex-row mt-4">
+              <View className="flex-1 mr-2">
                 <Button
-                  key={colorOption}
-                  variant="ghost"
-                  onPress={() => setColor(colorOption)}
-                  className="w-12 h-12 rounded-full p-0 mr-3 mb-3"
-                  style={{backgroundColor: colorOption}}>
-                  {color === colorOption ? (
-                    <Text className="text-white text-xl">✓</Text>
-                  ) : null}
-                </Button>
-              ))}
+                  label="Cancel"
+                  variant="outline"
+                  onPress={handleCancel}
+                />
+              </View>
+              <View className="flex-1">
+                <Button
+                  label={mode === 'add' ? 'Create' : 'Update'}
+                  onPress={handleSave}
+                />
+              </View>
             </View>
-          </View>
-          <View className="flex-row mt-4">
-            <View className="flex-1 mr-2">
-              <Button label="Cancel" variant="outline" onPress={handleCancel} />
-            </View>
-            <View className="flex-1">
-              <Button
-                label={mode === 'add' ? 'Create' : 'Update'}
-                onPress={handleSave}
-              />
-            </View>
-          </View>
-          <View className="h-32" /> {/* Spacer for floating navbar */}
-        </ScrollView>
+            <View className="h-32" /> {/* Spacer for floating navbar */}
+          </ScrollView>
+        </View>
       )}
     </View>
   );
