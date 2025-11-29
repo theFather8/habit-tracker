@@ -50,6 +50,8 @@ export default function Stats() {
         'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300',
       weekly:
         'bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300',
+      minutely:
+        'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-300',
     };
 
     return (
@@ -92,7 +94,10 @@ export default function Stats() {
   return (
     <View className="flex-1 bg-black">
       <FocusAwareStatusBar />
-      <ScrollView className="flex-1" showsVerticalScrollIndicator={false}>
+      <ScrollView
+        className="flex-1"
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{paddingBottom: 150}}>
         <View className="p-4">
           {/* Overview Stats */}
           <Text className="text-2xl font-bold mb-4 text-white">Overview</Text>

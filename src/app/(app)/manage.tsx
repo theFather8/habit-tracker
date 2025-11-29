@@ -159,7 +159,8 @@ export default function Manage() {
         <View className="flex-1">
           <ScrollView
             className="flex-1 px-4 pt-4"
-            showsVerticalScrollIndicator={false}>
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={{paddingBottom: 150}}>
             <View className="flex-row items-center justify-between mb-4">
               <Text className="text-2xl font-bold text-white">All Habits</Text>
               <View className="bg-purple-600 px-3 py-1 rounded-full">
@@ -203,7 +204,8 @@ export default function Manage() {
         <View style={{flex: 1}}>
           <ScrollView
             style={{flex: 1, padding: 16}}
-            showsVerticalScrollIndicator={false}>
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={{paddingBottom: 150}}>
             <Text className="text-2xl font-bold mb-6 text-white">
               {mode === 'add' ? 'Create New Habit' : 'Edit Habit'}
             </Text>

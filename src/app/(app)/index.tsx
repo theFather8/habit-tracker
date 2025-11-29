@@ -50,6 +50,7 @@ export default function Tracker() {
           // @ts-ignore
           estimatedItemSize={100}
           showsVerticalScrollIndicator={false}
+          contentContainerStyle={{paddingBottom: 150}}
         />
       </View>
     </View>
