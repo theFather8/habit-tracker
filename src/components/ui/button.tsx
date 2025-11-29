@@ -1,8 +1,8 @@
 import React from 'react';
-import type { PressableProps, View } from 'react-native';
-import { ActivityIndicator, Pressable, Text } from 'react-native';
-import type { VariantProps } from 'tailwind-variants';
-import { tv } from 'tailwind-variants';
+import type {PressableProps, View} from 'react-native';
+import {ActivityIndicator, Pressable, Text} from 'react-native';
+import type {VariantProps} from 'tailwind-variants';
+import {tv} from 'tailwind-variants';
 
 const button = tv({
   slots: {
@@ -14,9 +14,9 @@ const button = tv({
   variants: {
     variant: {
       default: {
-        container: 'bg-black dark:bg-white',
-        label: 'text-white dark:text-black',
-        indicator: 'text-white dark:text-black',
+        container: 'bg-purple-600',
+        label: 'text-white',
+        indicator: 'text-white',
       },
       secondary: {
         container: 'bg-primary-600',
@@ -58,7 +58,7 @@ const button = tv({
         label: 'text-sm',
         indicator: 'h-2',
       },
-      icon: { container: 'size-9' },
+      icon: {container: 'size-9'},
     },
     disabled: {
       true: {
@@ -105,21 +105,20 @@ export const Button = React.forwardRef<View, Props>(
       textClassName = '',
       ...props
     },
-    ref
+    ref,
   ) => {
     const styles = React.useMemo(
-      () => button({ variant, disabled, size }),
-      [variant, disabled, size]
+      () => button({variant, disabled, size}),
+      [variant, disabled, size],
     );
 
     return (
       <Pressable
         disabled={disabled || loading}
-        className={styles.container({ className })}
+        className={styles.container({className})}
         {...props}
         ref={ref}
-        testID={testID}
-      >
+        testID={testID}>
         {props.children ? (
           props.children
         ) : (
@@ -133,8 +132,7 @@ export const Button = React.forwardRef<View, Props>(
             ) : (
               <Text
                 testID={testID ? `${testID}-label` : undefined}
-                className={styles.label({ className: textClassName })}
-              >
+                className={styles.label({className: textClassName})}>
                 {text}
               </Text>
             )}
@@ -142,5 +140,5 @@ export const Button = React.forwardRef<View, Props>(
         )}
       </Pressable>
     );
-  }
+  },
 );
