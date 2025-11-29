@@ -21,7 +21,7 @@ export const WeatherWidget = () => {
     try {
       // Using New York coordinates as default; you can make this dynamic
       const response = await fetch(
-        'https://api.open-meteo.com/v1/forecast?latitude=40.71&longitude=-74.01&current_weather=true',
+        'https://api.open-meteo.com/v1/forecast?latitude=4.1755&longitude=73.5093&current_weather=true',
       );
 
       if (!response.ok) throw new Error('Failed to fetch weather');
@@ -135,7 +135,7 @@ export const WeatherWidget = () => {
         </View>
 
         <View className="items-end">
-          <Text className="text-white/80 text-sm">New York</Text>
+          <Text className="text-white/80 text-sm">Maldives</Text>
           <Text className="text-white/60 text-xs mt-1">
             {new Date().toLocaleDateString('en-US', {
               weekday: 'short',
