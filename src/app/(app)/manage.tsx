@@ -7,16 +7,15 @@ import {
   FocusAwareStatusBar,
   Text,
   View,
-  Select,
+  Pressable,
 } from '@/components/ui';
-import type {OptionType} from '@/components/ui';
 import {Habit, HabitFrequency} from '@/stores/types';
 import {Trash2, Edit, Plus} from '@/components/ui/icons';
 
-const frequencyOptions: OptionType[] = [
-  {value: 'hourly', label: 'Hourly'},
-  {value: 'daily', label: 'Daily'},
-  {value: 'weekly', label: 'Weekly'},
+const frequencyOptions = [
+  {value: 'hourly', label: 'Hourly ⏰'},
+  {value: 'daily', label: 'Daily 📅'},
+  {value: 'weekly', label: 'Weekly 📊'},
 ];
 
 const colorOptions = [
@@ -221,13 +220,37 @@ export default function Manage() {
               numberOfLines={3}
             />
 
-            <Select
-              key={`frequency-select-${mode}-${editingId || 'new'}`}
-              label="Frequency *"
-              options={frequencyOptions}
-              value={frequency}
-              onSelect={value => setFrequency(value as HabitFrequency)}
-            />
+            <View>
+              <Text className="text-sm font-medium text-gray-300 mb-3">
+                Frequency *
+              </Text>
+              <View className="gap-3">
+                {frequencyOptions.map(option => (
+                  <Pressable
+                    key={option.value}
+                    onPress={() => setFrequency(option.value as HabitFrequency)}
+                    className={`flex-row items-center p-4 rounded-xl border-2 ${
+                      frequency === option.value
+                        ? 'bg-purple-900/20 border-purple-600'
+                        : 'bg-gray-900 border-gray-700'
+                    }`}>
+                    <View
+                      className={`w-6 h-6 rounded-full border-2 items-center justify-center mr-3 ${
+                        frequency === option.value
+                          ? 'border-purple-600 bg-purple-600'
+                          : 'border-gray-600'
+                      }`}>
+                      {frequency === option.value && (
+                        <View className="w-3 h-3 rounded-full bg-white" />
+                      )}
+                    </View>
+                    <Text className="text-white text-base font-medium">
+                      {option.label}
+                    </Text>
+                  </Pressable>
+                ))}
+              </View>
+            </View>
 
             <View>
               <Text className="text-sm font-medium text-gray-300 mb-2">
