@@ -101,15 +101,15 @@ export default function Manage() {
 
   const HabitListItem = ({habit}: {habit: Habit}) => (
     <View
-      className="bg-white dark:bg-gray-800 rounded-xl p-4 mb-3 shadow-sm border border-gray-100 dark:border-gray-700"
+      className="bg-gray-900 rounded-xl p-4 mb-3 shadow-sm border border-gray-800"
       style={{borderLeftWidth: 4, borderLeftColor: habit.color}}>
       <View className="flex-row items-center justify-between mb-2">
         <View className="flex-1">
-          <Text className="text-lg font-semibold dark:text-white">
+          <Text className="text-lg font-semibold text-white">
             {habit.title}
           </Text>
           {habit.description ? (
-            <Text className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+            <Text className="text-sm text-gray-400 mt-1">
               {habit.description}
             </Text>
           ) : null}
@@ -118,13 +118,13 @@ export default function Manage() {
 
       <View className="flex-row items-center justify-between mt-2">
         <View className="flex-row items-center gap-2">
-          <View className="bg-gray-100 dark:bg-gray-700 px-3 py-1 rounded-full">
-            <Text className="text-xs font-medium text-gray-700 dark:text-gray-300 capitalize">
+          <View className="bg-gray-800 px-3 py-1 rounded-full">
+            <Text className="text-xs font-medium text-gray-300 capitalize">
               {habit.frequency}
             </Text>
           </View>
-          <View className="bg-amber-100 dark:bg-amber-900/30 px-3 py-1 rounded-full">
-            <Text className="text-xs font-medium text-amber-700 dark:text-amber-300">
+          <View className="bg-amber-900/30 px-3 py-1 rounded-full">
+            <Text className="text-xs font-medium text-amber-300">
               🔥 {habit.streak} streak
             </Text>
           </View>
@@ -153,7 +153,7 @@ export default function Manage() {
   );
 
   return (
-    <View className="flex-1 bg-gray-50 dark:bg-black">
+    <View className="flex-1 bg-black">
       <FocusAwareStatusBar />
 
       {mode === 'list' ? (
@@ -162,11 +162,9 @@ export default function Manage() {
             className="flex-1 px-4 pt-4"
             showsVerticalScrollIndicator={false}>
             <View className="flex-row items-center justify-between mb-4">
-              <Text className="text-2xl font-bold dark:text-white">
-                All Habits
-              </Text>
-              <View className="bg-violet-100 dark:bg-violet-900/30 px-3 py-1 rounded-full">
-                <Text className="text-violet-700 dark:text-violet-300 font-semibold">
+              <Text className="text-2xl font-bold text-white">All Habits</Text>
+              <View className="bg-purple-600 px-3 py-1 rounded-full">
+                <Text className="text-white font-semibold">
                   {habits.length}
                 </Text>
               </View>
@@ -174,10 +172,10 @@ export default function Manage() {
 
             {habits.length === 0 ? (
               <View className="items-center justify-center py-20">
-                <Text className="text-gray-400 text-center mb-2">
+                <Text className="text-gray-500 text-center mb-2">
                   No habits yet
                 </Text>
-                <Text className="text-gray-400 text-center text-sm">
+                <Text className="text-gray-500 text-center text-sm">
                   Tap the button below to create your first habit
                 </Text>
               </View>
@@ -188,7 +186,7 @@ export default function Manage() {
             )}
           </ScrollView>
 
-          <View className="p-4 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800">
+          <View className="p-4 bg-gray-900 border-t border-gray-800">
             <Button
               label="Add New Habit"
               onPress={() => setMode('add')}
@@ -202,7 +200,7 @@ export default function Manage() {
         </View>
       ) : (
         <ScrollView className="flex-1 p-4" showsVerticalScrollIndicator={false}>
-          <Text className="text-2xl font-bold mb-6 dark:text-white">
+          <Text className="text-2xl font-bold mb-6 text-white">
             {mode === 'add' ? 'Create New Habit' : 'Edit Habit'}
           </Text>
 
@@ -232,7 +230,7 @@ export default function Manage() {
             />
 
             <View>
-              <Text className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <Text className="text-sm font-medium text-gray-300 mb-2">
                 Color
               </Text>
               <View className="flex-row flex-wrap gap-3">

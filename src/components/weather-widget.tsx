@@ -76,8 +76,7 @@ export const WeatherWidget = () => {
 
   if (loading) {
     return (
-      <View
-        className={`rounded-3xl p-6 mb-4 shadow-lg bg-gradient-to-br ${getGradientColors()}`}>
+      <View className="rounded-3xl p-6 mb-4 shadow-lg bg-purple-600">
         <View className="items-center justify-center h-24">
           <ActivityIndicator size="large" color="#FFFFFF" />
           <Text className="text-white/80 mt-2 text-sm">Loading weather...</Text>
@@ -88,7 +87,7 @@ export const WeatherWidget = () => {
 
   if (error || !weather) {
     return (
-      <View className="rounded-3xl p-6 mb-4 shadow-lg bg-gradient-to-br from-gray-500 to-gray-700">
+      <View className="rounded-3xl p-6 mb-4 shadow-lg bg-gray-700">
         <View className="items-center justify-center">
           <Cloud color="#FFFFFF" width={32} height={32} />
           <Text className="text-white text-lg font-semibold mt-2">
@@ -113,8 +112,7 @@ export const WeatherWidget = () => {
   const WeatherIcon = getWeatherIcon(weather.weathercode);
 
   return (
-    <View
-      className={`rounded-3xl p-6 mb-4 shadow-lg bg-gradient-to-br ${getGradientColors()}`}>
+    <View className="rounded-3xl p-6 mb-4 shadow-lg bg-purple-600">
       <View className="flex-row items-center justify-between">
         <View className="flex-1">
           <View className="flex-row items-center mb-2">

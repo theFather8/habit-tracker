@@ -35,7 +35,7 @@ export default function Stats() {
     value: string | number;
     color: string;
   }) => (
-    <View className={`flex-1 ${color} rounded-2xl p-4 shadow-sm mx-1`}>
+    <View className={`flex-1 ${color} rounded-2xl p-4 shadow-lg mx-1`}>
       <Icon color="#FFFFFF" width={24} height={24} />
       <Text className="text-white text-3xl font-bold mt-2">{value}</Text>
       <Text className="text-white/80 text-sm mt-1">{label}</Text>
@@ -53,10 +53,10 @@ export default function Stats() {
     };
 
     return (
-      <View className="bg-white dark:bg-gray-800 rounded-xl p-4 mb-3 shadow-sm border border-gray-100 dark:border-gray-700">
+      <View className="bg-gray-900 rounded-xl p-4 mb-3 shadow-sm border border-gray-800">
         <View className="flex-row items-center justify-between">
           <View className="flex-1">
-            <Text className="text-lg font-semibold dark:text-white mb-1">
+            <Text className="text-lg font-semibold text-white mb-1">
               {habit.title}
             </Text>
             <View className="flex-row items-center gap-2">
@@ -78,13 +78,11 @@ export default function Stats() {
           <View className="items-center">
             <View className="flex-row items-center">
               <Flame color="#F59E0B" width={20} height={20} />
-              <Text className="text-2xl font-bold text-amber-600 dark:text-amber-400 ml-1">
+              <Text className="text-2xl font-bold text-amber-400 ml-1">
                 {habit.streak}
               </Text>
             </View>
-            <Text className="text-xs text-gray-500 dark:text-gray-400">
-              streak
-            </Text>
+            <Text className="text-xs text-gray-400">streak</Text>
           </View>
         </View>
       </View>
@@ -92,26 +90,24 @@ export default function Stats() {
   };
 
   return (
-    <View className="flex-1 bg-gray-50 dark:bg-black">
+    <View className="flex-1 bg-black">
       <FocusAwareStatusBar />
       <ScrollView className="flex-1" showsVerticalScrollIndicator={false}>
         <View className="p-4">
           {/* Overview Stats */}
-          <Text className="text-2xl font-bold mb-4 dark:text-white">
-            Overview
-          </Text>
+          <Text className="text-2xl font-bold mb-4 text-white">Overview</Text>
           <View className="flex-row mb-6">
             <StatCard
               icon={TrendingUp}
               label="Completion Rate"
               value={`${completionRate}%`}
-              color="bg-gradient-to-br from-violet-500 to-purple-600"
+              color="bg-purple-600"
             />
             <StatCard
               icon={Flame}
               label="Longest Streak"
               value={longestStreak}
-              color="bg-gradient-to-br from-amber-500 to-orange-600"
+              color="bg-purple-700"
             />
           </View>
 
@@ -120,13 +116,13 @@ export default function Stats() {
               icon={Calendar}
               label="Total Streaks"
               value={totalStreaks}
-              color="bg-gradient-to-br from-emerald-500 to-green-600"
+              color="bg-purple-800"
             />
             <StatCard
               icon={Clock}
               label="Completed Today"
               value={`${completedToday}/${totalHabits}`}
-              color="bg-gradient-to-br from-blue-500 to-cyan-600"
+              color="bg-purple-500"
             />
           </View>
 
@@ -146,11 +142,11 @@ export default function Stats() {
                 <View key={frequency} className="mb-6">
                   <View className="flex-row items-center mb-3">
                     <Icon color="#6B7280" width={20} height={20} />
-                    <Text className="text-xl font-bold ml-2 dark:text-white capitalize">
+                    <Text className="text-xl font-bold ml-2 text-white capitalize">
                       {frequency} Habits
                     </Text>
-                    <View className="bg-gray-200 dark:bg-gray-700 px-2 py-1 rounded-full ml-2">
-                      <Text className="text-gray-700 dark:text-gray-300 text-xs font-semibold">
+                    <View className="bg-gray-800 px-2 py-1 rounded-full ml-2">
+                      <Text className="text-gray-300 text-xs font-semibold">
                         {habitsInCategory.length}
                       </Text>
                     </View>
@@ -165,7 +161,7 @@ export default function Stats() {
 
           {totalHabits === 0 && (
             <View className="items-center justify-center py-20">
-              <Text className="text-gray-400 text-center">
+              <Text className="text-gray-500 text-center">
                 No habits yet. Create some in the Manage tab!
               </Text>
             </View>

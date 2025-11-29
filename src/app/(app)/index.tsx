@@ -23,7 +23,7 @@ export default function Tracker() {
   );
 
   return (
-    <View className="flex-1 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-black">
+    <View className="flex-1 bg-black">
       <FocusAwareStatusBar />
 
       {/* Weather Widget Section */}
@@ -34,11 +34,9 @@ export default function Tracker() {
       {/* Habits List Section */}
       <View className="flex-1 px-4">
         <View className="flex-row items-center justify-between mb-4">
-          <Text className="text-2xl font-bold dark:text-white">
-            Today's Habits
-          </Text>
-          <View className="bg-violet-100 dark:bg-violet-900/30 px-3 py-1 rounded-full">
-            <Text className="text-violet-700 dark:text-violet-300 font-semibold text-sm">
+          <Text className="text-2xl font-bold text-white">Today's Habits</Text>
+          <View className="bg-purple-600 px-3 py-1 rounded-full">
+            <Text className="text-white font-semibold text-sm">
               {habits.filter(h => h.completed).length}/{habits.length}
             </Text>
           </View>
