@@ -77,7 +77,7 @@ export default function TabLayout() {
         name="manage"
         options={{
           title: 'Manage',
-          headerTitle: 'Manage Habits',
+          headerShown: false, // Hide header as manage has its own stack
           tabBarIcon: ({color, size}) => (
             <View className="items-center justify-center h-full w-full pt-4">
               <Settings color={color} width={28} height={28} />
