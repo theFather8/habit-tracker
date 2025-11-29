@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {ScrollView, Alert} from 'react-native';
+import {Alert} from 'react-native';
 import {useHabits} from '@/context/HabitContext';
 import {
   Button,
@@ -8,6 +8,7 @@ import {
   Text,
   View,
   Pressable,
+  ScrollView,
 } from '@/components/ui';
 import {Habit, HabitFrequency} from '@/stores/types';
 import {Trash2, Edit, Plus} from '@/components/ui/icons';
@@ -117,8 +118,8 @@ export default function Manage() {
       </View>
 
       <View className="flex-row items-center justify-between mt-2">
-        <View className="flex-row items-center gap-2">
-          <View className="bg-gray-800 px-3 py-1 rounded-full">
+        <View className="flex-row items-center">
+          <View className="bg-gray-800 px-3 py-1 rounded-full mr-2">
             <Text className="text-xs font-medium text-gray-300 capitalize">
               {habit.frequency}
             </Text>
@@ -130,17 +131,15 @@ export default function Manage() {
           </View>
         </View>
 
-        <View className="flex-row gap-2">
+        <View className="flex-row">
           <Button
-            label=""
             size="sm"
             variant="outline"
             onPress={() => handleEdit(habit)}
-            className="w-10 h-10 items-center justify-center">
+            className="w-10 h-10 items-center justify-center mr-2">
             <Edit color="#6B7280" width={16} height={16} />
           </Button>
           <Button
-            label=""
             size="sm"
             variant="destructive"
             onPress={() => handleDelete(habit.id)}
@@ -169,7 +168,6 @@ export default function Manage() {
                 </Text>
               </View>
             </View>
-
             {habits.length === 0 ? (
               <View className="items-center justify-center py-20">
                 <Text className="text-gray-500 text-center mb-2">
@@ -184,112 +182,106 @@ export default function Manage() {
                 <HabitListItem key={habit.id} habit={habit} />
               ))
             )}
+            <View className="h-24" />
+            {/* Spacer for floating button and navbar */}
           </ScrollView>
 
-          <View className="p-4 bg-gray-900 border-t border-gray-800">
+          <View className="absolute bottom-24 right-6 left-6">
             <Button
-              label="Add New Habit"
               onPress={() => setMode('add')}
-              className="flex-row items-center justify-center">
-              <Plus color="#FFFFFF" width={20} height={20} />
-              <Text className="text-white font-semibold ml-2">
+              className="flex-row items-center justify-center shadow-lg bg-purple-600 rounded-full h-14">
+              <Plus color="#FFFFFF" width={24} height={24} />
+              <Text
+                className="text-white font-bold text-lg ml-2"
+                style={{color: '#FFFFFF'}}>
                 Add New Habit
               </Text>
             </Button>
           </View>
         </View>
       ) : (
-        <ScrollView className="flex-1 p-4" showsVerticalScrollIndicator={false}>
+        <ScrollView
+          style={{flex: 1, padding: 16}}
+          showsVerticalScrollIndicator={false}>
           <Text className="text-2xl font-bold mb-6 text-white">
             {mode === 'add' ? 'Create New Habit' : 'Edit Habit'}
           </Text>
-
-          <View className="gap-4">
-            <Input
-              label="Title *"
-              placeholder="e.g., Drink water, Exercise, Read"
-              value={title}
-              onChangeText={setTitle}
-            />
-
-            <Input
-              label="Description"
-              placeholder="Add details or goals (optional)"
-              value={description}
-              onChangeText={setDescription}
-              multiline
-              numberOfLines={3}
-            />
-
+          <Input
+            label="Title *"
+            placeholder="e.g., Drink water, Exercise, Read"
+            value={title}
+            onChangeText={setTitle}
+          />
+          <Input
+            label="Description"
+            placeholder="Add details or goals (optional)"
+            value={description}
+            onChangeText={setDescription}
+            multiline
+            numberOfLines={3}
+          />
+          <View>
+            <Text className="text-sm font-medium text-gray-300 mb-3">
+              Frequency *
+            </Text>
             <View>
-              <Text className="text-sm font-medium text-gray-300 mb-3">
-                Frequency *
-              </Text>
-              <View className="gap-3">
-                {frequencyOptions.map(option => (
-                  <Pressable
-                    key={option.value}
-                    onPress={() => setFrequency(option.value as HabitFrequency)}
-                    className={`flex-row items-center p-4 rounded-xl border-2 ${
+              {frequencyOptions.map(option => (
+                <Pressable
+                  key={option.value}
+                  onPress={() => setFrequency(option.value as HabitFrequency)}
+                  className={`flex-row items-center p-4 rounded-xl border-2 mb-3 ${
+                    frequency === option.value
+                      ? 'bg-purple-900/20 border-purple-600'
+                      : 'bg-gray-900 border-gray-700'
+                  }`}>
+                  <View
+                    className={`w-6 h-6 rounded-full border-2 items-center justify-center mr-3 ${
                       frequency === option.value
-                        ? 'bg-purple-900/20 border-purple-600'
-                        : 'bg-gray-900 border-gray-700'
+                        ? 'border-purple-600 bg-purple-600'
+                        : 'border-gray-600'
                     }`}>
-                    <View
-                      className={`w-6 h-6 rounded-full border-2 items-center justify-center mr-3 ${
-                        frequency === option.value
-                          ? 'border-purple-600 bg-purple-600'
-                          : 'border-gray-600'
-                      }`}>
-                      {frequency === option.value && (
-                        <View className="w-3 h-3 rounded-full bg-white" />
-                      )}
-                    </View>
-                    <Text className="text-white text-base font-medium">
-                      {option.label}
-                    </Text>
-                  </Pressable>
-                ))}
-              </View>
-            </View>
-
-            <View>
-              <Text className="text-sm font-medium text-gray-300 mb-2">
-                Color
-              </Text>
-              <View className="flex-row flex-wrap gap-3">
-                {colorOptions.map(colorOption => (
-                  <Button
-                    key={colorOption}
-                    label=""
-                    variant="ghost"
-                    onPress={() => setColor(colorOption)}
-                    className="w-12 h-12 rounded-full p-0"
-                    style={{backgroundColor: colorOption}}>
-                    {color === colorOption && (
-                      <Text className="text-white text-xl">✓</Text>
-                    )}
-                  </Button>
-                ))}
-              </View>
-            </View>
-
-            <View className="flex-row gap-2 mt-4">
-              <View className="flex-1">
-                <Button
-                  label="Cancel"
-                  variant="outline"
-                  onPress={handleCancel}
-                />
-              </View>
-              <View className="flex-1">
-                <Button
-                  label={mode === 'add' ? 'Create' : 'Update'}
-                  onPress={handleSave}
-                />
-              </View>
+                    {frequency === option.value ? (
+                      <View className="w-3 h-3 rounded-full bg-white" />
+                    ) : null}
+                  </View>
+                  <Text className="text-white text-base font-medium">
+                    {option.label}
+                  </Text>
+                </Pressable>
+              ))}
             </View>
           </View>
+          <View>
+            <Text className="text-sm font-medium text-gray-300 mb-2">
+              Color
+            </Text>
+            <View className="flex-row flex-wrap">
+              {colorOptions.map(colorOption => (
+                <Button
+                  key={colorOption}
+                  variant="ghost"
+                  onPress={() => setColor(colorOption)}
+                  className="w-12 h-12 rounded-full p-0 mr-3 mb-3"
+                  style={{backgroundColor: colorOption}}>
+                  {color === colorOption ? (
+                    <Text className="text-white text-xl">✓</Text>
+                  ) : null}
+                </Button>
+              ))}
+            </View>
+          </View>
+          <View className="flex-row mt-4">
+            <View className="flex-1 mr-2">
+              <Button label="Cancel" variant="outline" onPress={handleCancel} />
+            </View>
+            <View className="flex-1">
+              <Button
+                label={mode === 'add' ? 'Create' : 'Update'}
+                onPress={handleSave}
+              />
+            </View>
+          </View>
+          <View className="h-32" /> {/* Spacer for floating navbar */}
         </ScrollView>
       )}
     </View>

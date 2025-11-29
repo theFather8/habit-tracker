@@ -1,8 +1,10 @@
 import React from 'react';
 import type {PressableProps, View} from 'react-native';
-import {ActivityIndicator, Pressable, Text} from 'react-native';
+import {ActivityIndicator, Pressable} from 'react-native';
 import type {VariantProps} from 'tailwind-variants';
 import {tv} from 'tailwind-variants';
+
+import {Text} from './text';
 
 const button = tv({
   slots: {
