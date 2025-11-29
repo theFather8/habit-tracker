@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {View, Text, ActivityIndicator} from '@/components/ui';
 import {Cloud, CloudRain, Sun, Wind, RefreshCw} from '@/components/ui/icons';
 
@@ -19,7 +20,7 @@ export const WeatherWidget = () => {
     setError(false);
 
     try {
-      // Using New York coordinates as default; you can make this dynamic
+      // Try to fetch fresh data
       const response = await fetch(
         'https://api.open-meteo.com/v1/forecast?latitude=4.1755&longitude=73.5093&current_weather=true',
       );
@@ -28,16 +29,51 @@ export const WeatherWidget = () => {
 
       const data = await response.json();
       setWeather(data.current_weather);
+
+      // Cache the successful response
+      await AsyncStorage.setItem(
+        '@weather_cache',
+        JSON.stringify(data.current_weather),
+      );
     } catch (err) {
       console.error('Weather fetch error:', err);
-      setError(true);
+
+      // If fetch fails, try to load from cache
+      try {
+        const cached = await AsyncStorage.getItem('@weather_cache');
+        if (cached) {
+          setWeather(JSON.parse(cached));
+          // Don't set error if we have cached data, just maybe show a stale indicator if desired
+          // For now, we just show the cached data as requested
+        } else {
+          setError(true);
+        }
+      } catch (cacheErr) {
+        console.error('Cache load error:', cacheErr);
+        setError(true);
+      }
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchWeather();
+    // Try to load cache immediately for fast render
+    const loadCache = async () => {
+      try {
+        const cached = await AsyncStorage.getItem('@weather_cache');
+        if (cached) {
+          setWeather(JSON.parse(cached));
+          setLoading(false); // Show cached data immediately
+        }
+      } catch (e) {
+        // Ignore cache load error on mount
+      }
+      // Then fetch fresh data
+      fetchWeather();
+    };
+
+    loadCache();
   }, []);
 
   const getWeatherIcon = (code: number) => {
