@@ -10,6 +10,12 @@ interface HabitItemProps {
 
 export const HabitItem = ({habit, onToggle}: HabitItemProps) => {
   const frequencyConfig = {
+    minutely: {
+      bg: 'bg-yellow-900/30',
+      text: 'text-yellow-300',
+      border: 'border-yellow-800',
+      icon: '⚡',
+    },
     hourly: {
       bg: 'bg-blue-900/30',
       text: 'text-blue-300',

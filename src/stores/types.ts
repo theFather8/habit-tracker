@@ -17,7 +17,7 @@ export interface IStore {
   hydrate?: () => PVoid;
 }
 
-export type HabitFrequency = 'hourly' | 'daily' | 'weekly';
+export type HabitFrequency = 'minutely' | 'hourly' | 'daily' | 'weekly';
 
 export interface Habit {
   id: string;

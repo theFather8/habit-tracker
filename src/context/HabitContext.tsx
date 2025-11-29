@@ -70,6 +70,14 @@ export const HabitProvider: React.FC<{children: React.ReactNode}> = ({
       let shouldResetStreak = false;
 
       switch (habit.frequency) {
+        case 'minutely':
+          // Reset if more than 1 minute has passed (for testing)
+          const minutesDiff =
+            (now.getTime() - lastCompletedDate.getTime()) / (1000 * 60);
+          shouldReset = minutesDiff >= 1;
+          shouldResetStreak = minutesDiff >= 2; // Allow 1 minute grace period for streak
+          break;
+
         case 'hourly':
           // Reset if more than 1 hour has passed
           const hoursDiff =

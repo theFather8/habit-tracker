@@ -13,6 +13,7 @@ import {Habit, HabitFrequency} from '@/stores/types';
 import {Trash2, Edit, Plus} from '@/components/ui/icons';
 
 const frequencyOptions = [
+  {value: 'minutely', label: 'Every Minute ⚡ (Testing)'},
   {value: 'hourly', label: 'Hourly ⏰'},
   {value: 'daily', label: 'Daily 📅'},
   {value: 'weekly', label: 'Weekly 📊'},
