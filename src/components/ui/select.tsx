@@ -62,7 +62,6 @@ type OptionsProps = {
   onSelect: (option: OptionType) => void;
   value?: string | number;
   testID?: string;
-  isVisible: boolean;
 };
 
 function keyExtractor(item: OptionType) {
@@ -70,7 +69,7 @@ function keyExtractor(item: OptionType) {
 }
 
 export const Options = React.forwardRef<BottomSheetModal, OptionsProps>(
-  ({options, onSelect, value, testID, isVisible}, ref) => {
+  ({options, onSelect, value, testID}, ref) => {
     const height = options.length * 70 + 100;
     const snapPoints = React.useMemo(() => [height], [height]);
     const {colorScheme} = useColorScheme();
@@ -95,10 +94,6 @@ export const Options = React.forwardRef<BottomSheetModal, OptionsProps>(
             estimatedItemSize: 52,
           }
         : {};
-
-    if (!isVisible) {
-      return null;
-    }
 
     return (
       <Modal
@@ -165,15 +160,6 @@ export const Select = (props: SelectProps) => {
     testID,
   } = props;
   const modal = useModal();
-  const [isModalVisible, setIsModalVisible] = React.useState(false);
-
-  const handlePresent = React.useCallback(() => {
-    setIsModalVisible(true);
-    // Use setTimeout to ensure the modal is mounted before presenting
-    setTimeout(() => {
-      modal.present();
-    }, 100);
-  }, [modal]);
 
   const onSelectOption = React.useCallback(
     (option: OptionType) => {
@@ -213,7 +199,7 @@ export const Select = (props: SelectProps) => {
         <Pressable
           className={styles.input()}
           disabled={disabled}
-          onPress={handlePresent}
+          onPress={modal.present}
           testID={testID ? `${testID}-trigger` : undefined}>
           <View className="flex-1">
             <Text className={styles.inputValue()}>{textValue}</Text>
@@ -234,7 +220,6 @@ export const Select = (props: SelectProps) => {
         options={options}
         value={value}
         onSelect={onSelectOption}
-        isVisible={isModalVisible}
       />
     </>
   );
