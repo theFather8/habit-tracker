@@ -115,20 +115,34 @@ export const HabitProvider: React.FC<{children: React.ReactNode}> = ({
             const d = new Date(date);
             const day = d.getDay();
             const diff = d.getDate() - day + (day === 0 ? -6 : 1); // Adjust for Sunday
-            return new Date(d.setDate(diff));
+            d.setDate(diff);
+            // Normalize time to start of day for accurate comparison
+            d.setHours(0, 0, 0, 0);
+            return d;
           };
 
           const currentWeekStart = getWeekStart(now);
           const lastCompletedWeekStart = getWeekStart(lastCompletedDate);
-          shouldReset =
-            currentWeekStart.getTime() !== lastCompletedWeekStart.getTime();
+
+          // Compare dates by day
+          const isSameWeek =
+            currentWeekStart.getFullYear() ===
+              lastCompletedWeekStart.getFullYear() &&
+            currentWeekStart.getMonth() === lastCompletedWeekStart.getMonth() &&
+            currentWeekStart.getDate() === lastCompletedWeekStart.getDate();
+
+          shouldReset = !isSameWeek;
 
           // Reset streak if missed last week
           const lastWeekStart = new Date(currentWeekStart);
           lastWeekStart.setDate(lastWeekStart.getDate() - 7);
-          shouldResetStreak =
-            shouldReset &&
-            lastCompletedWeekStart.getTime() !== lastWeekStart.getTime();
+          const wasLastWeek =
+            lastCompletedWeekStart.getFullYear() ===
+              lastWeekStart.getFullYear() &&
+            lastCompletedWeekStart.getMonth() === lastWeekStart.getMonth() &&
+            lastCompletedWeekStart.getDate() === lastWeekStart.getDate();
+
+          shouldResetStreak = shouldReset && !wasLastWeek;
           break;
       }
 
