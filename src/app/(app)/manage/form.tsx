@@ -51,7 +51,7 @@ export default function HabitForm() {
       setFrequency((params.frequency as HabitFrequency) || 'daily');
       setColor((params.color as string) || '#8B5CF6');
     }
-  }, [isEditing, params]);
+  }, [isEditing]);
 
   useEffect(() => {
     router.setParams({
