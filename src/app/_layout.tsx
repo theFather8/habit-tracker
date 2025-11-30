@@ -3,6 +3,7 @@ import '../../global.css';
 import {Slot, SplashScreen} from 'expo-router';
 import {useEffect, useState} from 'react';
 import {hydrateStores} from '@/stores';
+import {I18nManager} from 'react-native';
 import {Providers} from '@/providers';
 
 // Prevent the splash screen from auto-hiding
@@ -14,6 +15,11 @@ export default function RootLayout() {
   useEffect(() => {
     const initializeApp = async () => {
       try {
+        if (I18nManager.isRTL) {
+          I18nManager.allowRTL(false);
+          I18nManager.forceRTL(false);
+        }
+
         // Hydrate all stores from AsyncStorage
         await hydrateStores();
         setIsHydrated(true);

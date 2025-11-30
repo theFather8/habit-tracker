@@ -47,6 +47,7 @@ export default {
         foregroundImage: './assets/adaptive-icon.png',
         backgroundColor: '#ffffff',
       },
+      backgroundColor: '#000000',
     },
     extra: {
       API_URL: process.env.API_URL,
