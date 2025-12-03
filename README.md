@@ -152,27 +152,27 @@ npx expo build:android
 
 ### Home Screen (Tracker)
 
-![Tracker Screen](./screenshots/tracker.png)
+![Tracker Screen](./screenshots/tracker.PNG)
 _Main habit tracking interface with weather widget and today's habits_
 
 ### Statistics Screen
 
-![Statistics Screen](./screenshots/stats.png)
+![Statistics Screen](./screenshots/statistics.PNG)
 _Overview metrics and detailed habit statistics grouped by frequency_
 
 ### Manage Screen
 
-![Manage Screen](./screenshots/manage.png)
+![Manage Screen](./screenshots/manage.PNG)
 _Full habit list with edit and delete options_
 
 ### Create/Edit Habit Form
 
-![Habit Form](./screenshots/form.png)
+![Habit Form](./screenshots/form.PNG)
 _Habit creation and editing interface with frequency selection and color picker_
 
 ### Floating Navigation
 
-![Navigation Bar](./screenshots/navigation.png)
+![Navigation Bar](./screenshots/navigation.jpg)
 _Modern floating pill-style tab navigation_
 
 ## Project Structure
