@@ -2,10 +2,10 @@ import 'dotenv/config';
 
 export default {
   expo: {
-    name: 'expo-go-villa-sample',
-    slug: 'expo-go-villa-sample',
+    name: 'habit-app',
+    slug: 'habit-app',
     version: '1.0.0',
-    scheme: 'expo-go-villa-sample',
+    scheme: 'habit-app',
     platforms: ['ios', 'android'],
     web: {
       bundler: 'metro',

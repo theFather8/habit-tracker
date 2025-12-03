@@ -2,19 +2,19 @@
 // It is safe to delete this file as it does not affect the functionality of your application.
 {
   "cesVersion": "2.19.1",
-  "projectName": "expo-go-villa-sample",
+  "projectName": "habit-app",
   "packages": [
     {
       "name": "expo-router",
       "type": "navigation",
       "options": {
-        "type": "stack"
-      }
+        "type": "stack",
+      },
     },
     {
       "name": "nativewind",
-      "type": "styling"
-    }
+      "type": "styling",
+    },
   ],
   "flags": {
     "noGit": false,
@@ -23,16 +23,16 @@
     "importAlias": true,
     "packageManager": "npm",
     "eas": false,
-    "publish": false
+    "publish": false,
   },
   "packageManager": {
     "type": "npm",
-    "version": "10.8.2"
+    "version": "10.8.2",
   },
   "os": {
     "type": "Darwin",
     "platform": "darwin",
     "arch": "arm64",
-    "kernelVersion": "23.6.0"
-  }
+    "kernelVersion": "23.6.0",
+  },
 }

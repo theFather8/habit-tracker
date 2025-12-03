@@ -115,7 +115,7 @@ Habit-App is a cross-platform mobile application that enables users to create, t
 
    ```bash
    git clone <repository-url>
-   cd RN-ExpoGo-Villa-Sample
+   cd habit-tracker
    ```
 
 2. **Install dependencies**
