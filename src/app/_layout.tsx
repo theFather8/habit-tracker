@@ -2,7 +2,6 @@ import '../../global.css';
 
 import {Slot, SplashScreen} from 'expo-router';
 import {useEffect, useState} from 'react';
-import {hydrateStores} from '@/stores';
 import {I18nManager} from 'react-native';
 import {Providers} from '@/providers';
 
@@ -10,22 +9,21 @@ import {Providers} from '@/providers';
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-  const [isHydrated, setIsHydrated] = useState(false);
+  const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
     const initializeApp = async () => {
       try {
+        // Disable RTL if enabled
         if (I18nManager.isRTL) {
           I18nManager.allowRTL(false);
           I18nManager.forceRTL(false);
         }
 
-        // Hydrate all stores from AsyncStorage
-        await hydrateStores();
-        setIsHydrated(true);
+        setIsReady(true);
       } catch (error) {
-        console.error('Failed to hydrate stores:', error);
-        setIsHydrated(true); // Continue anyway
+        console.error('Failed to initialize app:', error);
+        setIsReady(true); // Continue anyway
       }
     };
 
@@ -33,7 +31,7 @@ export default function RootLayout() {
   }, []);
 
   useEffect(() => {
-    if (isHydrated) {
+    if (isReady) {
       // Hide splash screen once the app is ready
       const hideSplash = async () => {
         await SplashScreen.hideAsync();
@@ -44,10 +42,10 @@ export default function RootLayout() {
         hideSplash();
       }, 500);
     }
-  }, [isHydrated]);
+  }, [isReady]);
 
-  if (!isHydrated) {
-    return null; // or a loading screen
+  if (!isReady) {
+    return null;
   }
 
   return (

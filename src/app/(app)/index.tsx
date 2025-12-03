@@ -4,7 +4,7 @@ import {useHabits} from '@/context/HabitContext';
 import {FocusAwareStatusBar, Text, View, EmptyList} from '@/components/ui';
 import {HabitItem} from '@/components/habit-item';
 import {WeatherWidget} from '@/components/weather-widget';
-import {Habit} from '@/stores/types';
+import {Habit} from '@/types';
 
 export default function Tracker() {
   const {habits, toggleHabitCompletion, loading} = useHabits();

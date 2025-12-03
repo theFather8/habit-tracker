@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Text, Pressable} from '@/components/ui';
-import {Habit} from '@/stores/types';
+import {Habit} from '@/types';
 import {CheckCircle2, Circle, Flame} from '@/components/ui/icons';
 
 interface HabitItemProps {

@@ -9,7 +9,7 @@ import {
   View,
   ScrollView,
 } from '@/components/ui';
-import {Habit} from '@/stores/types';
+import {Habit} from '@/types';
 import {Trash2, Edit, Plus} from '@/components/ui/icons';
 
 export default function ManageIndex() {

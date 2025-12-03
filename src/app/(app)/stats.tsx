@@ -3,7 +3,7 @@ import {ScrollView} from 'react-native';
 import {useHabits} from '@/context/HabitContext';
 import {FocusAwareStatusBar, Text, View} from '@/components/ui';
 import {Flame, TrendingUp, Calendar, Clock} from '@/components/ui/icons';
-import {Habit} from '@/stores/types';
+import {Habit} from '@/types';
 
 export default function Stats() {
   const {habits} = useHabits();

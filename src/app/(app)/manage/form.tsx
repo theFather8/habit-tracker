@@ -11,7 +11,7 @@ import {
   Pressable,
   ScrollView,
 } from '@/components/ui';
-import {HabitFrequency} from '@/stores/types';
+import {HabitFrequency} from '@/types';
 
 const frequencyOptions = [
   {value: 'minutely', label: 'Every Minute ⚡ (Testing)'},

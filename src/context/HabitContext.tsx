@@ -7,7 +7,7 @@ import React, {
 } from 'react';
 import {AppState, AppStateStatus} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {Habit, HabitFrequency} from '@/stores/types';
+import {Habit, HabitFrequency} from '@/types';
 
 interface HabitContextType {
   habits: Habit[];
