@@ -6,6 +6,8 @@ A modern, feature-rich mobile habit tracking application built with React Native
 
 Habit-App is a cross-platform mobile application that enables users to create, track, and manage their daily habits with ease. The app features a beautiful dark-themed UI, smart frequency-based habit resets, streak tracking with grace periods, and weather-aware habit planning through real-time API integration.
 
+**Architecture**: Built with a clean, streamlined codebase focused solely on habit tracking functionality. Uses React Context API for state management and AsyncStorage for local data persistence, eliminating unnecessary complexity while maintaining full feature richness.
+
 ## Key Features
 
 ### Full CRUD Operations
@@ -195,8 +197,10 @@ src/
 │   └── ui/                    # Reusable UI components
 ├── context/
 │   └── HabitContext.tsx       # Global habit state
-└── stores/
-    └── types.ts               # TypeScript interfaces
+ ├── providers/
+│   └── index.tsx              # App providers
+└── types/
+    └── index.ts               # TypeScript interfaces
 ```
 
 ## Configuration
